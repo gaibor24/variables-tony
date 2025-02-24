@@ -1,0 +1,85 @@
+﻿@model List<ClienteModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Hola Mundo</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <a href="/Home/Privacy?nombre=Juan+Diego&apellido=Llerena&edad=36">Políticas de Privacidad</a>
+</div>
+
+<div class="row">
+    <h2>Lista de Clientes</h2>
+
+    <!-- Botón para crear un nuevo cliente -->
+    <div class="mb-3">
+        <a href="@Url.Action("Create", "Cliente")" class="btn btn-success">Crear Cliente</a>
+    </div>
+
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th>Cédula</th>
+                <th>Nombres</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Acciones</th> <!-- Nueva columna para acciones -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cliente in Model)
+            {
+                <tr>
+                    <td>@cliente.Cedula_RUC</td>
+                    <td>@cliente.Nombre</td>
+                    <td>@cliente.Apellido</td>
+                    <td>@cliente.Edad</td>
+                    <td>
+                        <!-- Botón Editar -->
+                        <a href="@Url.Action("Edit", "Cliente", new { id = cliente.Cedula_RUC })" class="btn btn-warning btn-sm">Editar</a>
+
+                        <!-- Botón Eliminar -->
+                        <form asp-action="Delete" asp-controller="Cliente" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@cliente.Cedula_RUC" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este cliente?');">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<!--
+    PAGINAS WEB   CSHTML
+GET  => url
+
+    mipagina.com?x=Luis 
+    mipagina.com?nombre=Luis&apellido=Llerena&edad=36
+
+    https://www.google.com/search?q=tipo+de+respuesta+de+http
+    &sca_esv=439581a86ae48606&sxsrf=AHTn8zoVv8RqaJ7cVGAu8_ft8nnhQetKSQ%3A1739838580639
+    &source=hp
+    &ei=dNSzZ_nrJPCbwbkPp_zngA4&iflsig=ACkRmUkAAAAAZ7PihDP9_MbCo0U52uup6AYM_gh0DGCT
+    &oq=tipo+de+respuesta+de+htt
+    &gs_lp=Egdnd3Mtd2l6Ihh0aXBvIGRlIHJlc3B1ZXN0YSBkZSBodHQqAggAMgcQIRigARgKMgcQIRigARgKMgcQIRigARgKMgUQIRifBTIFECEYnwUyBRAhGJ8FMgUQIRifBTIFECEYnwUyBRAhGJ8FMgUQIRifBUjRKVC8BViaHnABeACQAQCYAaIBoAHuF6oBBDAuMjS4AQPIAQD4AQGYAhmgAqoYqAILwgIGELMBGIUEwgIKEAAYAxjqAhiPAcICChAuGAMY6gIYjwHCAgsQABiABBixAxiDAcICBRAAGIAEwgIIEAAYgAQYsQPCAgsQLhiABBjRAxjHAcICDhAuGIAEGLEDGNEDGMcBwgILEAAYgAQYsQMYigXCAgcQABiABBgKwgIGEAAYFhgewgIFEAAY7wXCAggQABiABBiiBMICBRAhGKABmAMK8QX91TcYvkG9BpIHBDEuMjSgB7uYAQ
+    &sclient=gws-wiz
+
+
+
+MVC
+
+controladores => acciones(metodos) Task  ActionResult IActionResult
+
+https://localhost:7257/controlador/accion/id
+https://localhost:7257/home/privacy
+
+
+
+
+-->
