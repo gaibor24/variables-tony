@@ -1,0 +1,49 @@
+﻿@model ClienteModel
+
+@{
+    ViewData["Title"] = Model.Id == 0 ? "Agregar Cliente" : "Editar Cliente";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="display-4">
+        <label for="nombre">El Nombre es:</label> @Model.Nombre
+        <br />
+        <label for="apellido">El Apellido es:</label> @Model.Apellido
+    </div>
+
+    <div class="row">
+        <div class="container-fluid">
+            <form asp-action="Guardar" method="post">
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+                <h1>Ingreso de Clientes</h1>
+
+                <div class="col-lg-3">
+                    <label>Cédula</label>
+                    <input type="text" class="form-control" name="Cedula_RUC" value="@Model.Cedula_RUC" placeholder="Ingrese su CI" required />
+                </div>
+
+                <div class="col-lg-3">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" name="Nombre" value="@Model.Nombre" placeholder="Ingrese su nombre" required />
+                </div>
+
+                <div class="col-lg-3">
+                    <label>Apellido</label>
+                    <input type="text" class="form-control" name="Apellido" value="@Model.Apellido" placeholder="Ingrese su apellido" required />
+                </div>
+
+                <div class="col-lg-3">
+                    <label>Edad</label>
+                    <input type="number" class="form-control" name="Edad" value="@Model.Edad" placeholder="Ingrese su edad" required />
+                </div>
+
+                <div class="col-lg-3">
+                    <button type="submit" class="btn btn-outline-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
